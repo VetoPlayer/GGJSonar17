@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour {
     public Transform spawnPosition;
     public static readonly int maxArcsPerWave = 5;
     public float waitTimeBetweenArcs = 2f; 
+	public float disableTime= 2f;
 
     private LinkedList<GameObject> generatedArcs;
 
@@ -27,6 +28,7 @@ public class WaveManager : MonoBehaviour {
         {
             CreateSingleArc();
 
+
             yield return new WaitForSeconds(waitTimeBetweenArcs);
         }
     }
@@ -35,9 +37,18 @@ public class WaveManager : MonoBehaviour {
     {
         GameObject arc = ObjectPoolingManager.Instance.GetObject(arcPrefab.name);
         ResetArc(arc);
+		StartCoroutine (DisableTimer(arc));
 
         UpdateLinkedList(arc);
     }
+
+
+	IEnumerator DisableTimer(GameObject arc){
+		yield return new WaitForSeconds (disableTime);
+		arc.SetActive (false);
+		generatedArcs.RemoveFirst ();
+
+	}
 
     private void ResetArc(GameObject arc)
     {
