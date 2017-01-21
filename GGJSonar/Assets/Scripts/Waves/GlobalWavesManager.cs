@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,15 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
 
     private LinkedList<GameObject> wavesInPlay;
 
+    public bool arePoolsReady = false;
+
     void Awake()
     {
         ObjectPoolingManager.Instance.CreatePool(wavePrefab, maxArcGenerators, maxArcGenerators);
+        ObjectPoolingManager.Instance.CreatePool(arcPrefab, GlobalWavesManager.maxArcGenerators * WaveManager.maxArcsPerWave,
+            GlobalWavesManager.maxArcGenerators * WaveManager.maxArcsPerWave);
+
+        arePoolsReady = true;
     }
 
     void Start()

@@ -12,21 +12,18 @@ public class WaveManager : MonoBehaviour {
 
     private LinkedList<GameObject> generatedArcs;
 
-    void Awake()
+    void OnEnable()
     {
-        ObjectPoolingManager.Instance.CreatePool(arcPrefab, GlobalWavesManager.maxArcGenerators * maxArcsPerWave, GlobalWavesManager.maxArcGenerators * maxArcsPerWave);
-    }
-
-    // Use this for initialization
-    void Start () {
         generatedArcs = new LinkedList<GameObject>();
-        
         StartCoroutine(GenerateArcs());
-	}
+    }
 
     private IEnumerator GenerateArcs()
     {
-        while( true )
+        while (!GlobalWavesManager.Instance.arePoolsReady)
+            yield return new WaitForSeconds(0.1f);
+
+        while(true)
         {
             CreateSingleArc();
 
@@ -37,11 +34,16 @@ public class WaveManager : MonoBehaviour {
     private void CreateSingleArc()
     {
         GameObject arc = ObjectPoolingManager.Instance.GetObject(arcPrefab.name);
-        arc.transform.position = spawnPosition.position;
-        arc.transform.rotation = Quaternion.identity;
-        //arc.transform.parent = gameObject.transform;
+        ResetArc(arc);
 
         UpdateLinkedList(arc);
+    }
+
+    private void ResetArc(GameObject arc)
+    {
+        arc.transform.position = spawnPosition.position;
+        arc.transform.rotation = Quaternion.identity;
+        arc.transform.localScale = Vector3.one;
     }
 
     private void UpdateLinkedList(GameObject arc)
@@ -51,6 +53,17 @@ public class WaveManager : MonoBehaviour {
         {
             generatedArcs.Last.Value.gameObject.SetActive(false);
             generatedArcs.RemoveLast();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (generatedArcs == null)
+            return;
+
+        foreach (var arc in generatedArcs)
+        {
+            arc.gameObject.SetActive(false);
         }
     }
 }
