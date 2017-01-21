@@ -8,12 +8,24 @@ public class ArcExpander : MonoBehaviour {
     public float expandSpeed = 1f;
     public float moveYSpeed = 1f;
 
+	public Vector3 initialScale;
+
+	void OnEnable(){
+		transform.localScale = initialScale;
+
+	}
+
+
 	// Update is called once per frame
 	void Update ()
     {
         Rescale();
         MoveArc();
     }
+
+
+
+
 
     private void MoveArc()
     {
@@ -23,8 +35,9 @@ public class ArcExpander : MonoBehaviour {
 
     private void Rescale()
     {
+		
         Vector3 scale = transform.localScale;
-        scale.x += expandSpeed * Time.deltaTime;
+		scale.x += expandSpeed * Time.deltaTime;
         scale.y += expandSpeed * Time.deltaTime;
 
         transform.localScale = scale;
