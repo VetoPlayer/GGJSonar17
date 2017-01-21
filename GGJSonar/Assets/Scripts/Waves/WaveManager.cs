@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour {
 
+	public Transform arcContainer;
+
     public GameObject arcPrefab;
     public Transform spawnPosition;
     public static readonly int maxArcsPerWave = 5;
@@ -54,6 +56,7 @@ public class WaveManager : MonoBehaviour {
     private void ResetArc(GameObject arc)
     {
 		arc.SetActive (false);
+		arc.transform.parent = arcContainer;
         arc.transform.position = spawnPosition.position;
         arc.transform.rotation = Quaternion.identity;
         arc.transform.localScale = Vector3.one;

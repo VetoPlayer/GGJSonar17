@@ -7,6 +7,11 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
 
 	protected GlobalWavesManager(){}
 
+
+	[Header("Container")]
+	public GameObject container;
+
+
     [Header("Maximum number of allowed Waves at time")]
     [Range(1, 6)]
     public static readonly int maxArcGenerators = 6;
@@ -73,11 +78,12 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
         UpdateLinkedList(wave);
     }
 
-    private static void ResetWave(Vector3 touchPosition, GameObject wave)
+    private void ResetWave(Vector3 touchPosition, GameObject wave)
     {
         wave.SetActive(false);
         wave.transform.position = touchPosition;
         wave.transform.rotation = Quaternion.identity;
+		wave.transform.parent = container.transform;
         wave.SetActive(true);
     }
 
