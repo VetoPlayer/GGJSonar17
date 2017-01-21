@@ -52,9 +52,11 @@ public class WaveManager : MonoBehaviour {
 
     private void ResetArc(GameObject arc)
     {
+		arc.SetActive (false);
         arc.transform.position = spawnPosition.position;
         arc.transform.rotation = Quaternion.identity;
         arc.transform.localScale = Vector3.one;
+		arc.SetActive (true);
     }
 
     private void UpdateLinkedList(GameObject arc)
@@ -74,7 +76,7 @@ public class WaveManager : MonoBehaviour {
 
         foreach (var arc in generatedArcs)
         {
-            arc.gameObject.SetActive(false);
+            arc.SetActive(false);
         }
     }
 }
