@@ -12,7 +12,7 @@ public class InputManager : Singleton<InputManager> {
 	// Update is called once per frame
 	void Update () {
 		if (Input.touches.Length == MAX_NUM_TOUCHES) {
-			WaveManager.Instance.SpawnWave(Input.GetTouch(0));
+			GlobalWavesManager.Instance.SpawnWave(Input.GetTouch(0));
 		}
 	
 	}
