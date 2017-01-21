@@ -43,13 +43,19 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
     private void SpawnWaveAtPosition(Vector3 touchPosition)
     {
         GameObject wave = ObjectPoolingManager.Instance.GetObject(wavePrefab.name);
-        wave.transform.position = touchPosition;
-        wave.transform.rotation = Quaternion.identity;
+        ResetWave(touchPosition, wave);
         UpdateLinkedList(wave);
     }
-	
 
-	private void UpdateLinkedList(GameObject wave){
+    private static void ResetWave(Vector3 touchPosition, GameObject wave)
+    {
+        wave.SetActive(false);
+        wave.transform.position = touchPosition;
+        wave.transform.rotation = Quaternion.identity;
+        wave.SetActive(true);
+    }
+
+    private void UpdateLinkedList(GameObject wave){
 		wavesInPlay.AddFirst (wave);
 		if(wavesInPlay.Count >= maxArcGenerators){
 			wavesInPlay.Last.Value.gameObject.SetActive (false);

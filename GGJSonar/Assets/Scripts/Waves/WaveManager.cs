@@ -28,7 +28,6 @@ public class WaveManager : MonoBehaviour {
         {
             CreateSingleArc();
 
-
             yield return new WaitForSeconds(waitTimeBetweenArcs);
         }
     }
