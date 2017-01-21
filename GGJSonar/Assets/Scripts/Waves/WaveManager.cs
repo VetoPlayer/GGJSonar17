@@ -12,9 +12,11 @@ public class WaveManager : MonoBehaviour {
 	public float disableTime= 2f;
 
     private LinkedList<GameObject> generatedArcs;
+    private bool canGenerateArcs = true;
 
     void OnEnable()
     {
+        canGenerateArcs = true;
         generatedArcs = new LinkedList<GameObject>();
         StartCoroutine(GenerateArcs());
     }
@@ -24,7 +26,7 @@ public class WaveManager : MonoBehaviour {
         while (!GlobalWavesManager.Instance.arePoolsReady)
             yield return new WaitForSeconds(0.1f);
 
-        while(true)
+        while(canGenerateArcs)
         {
             CreateSingleArc();
 
@@ -68,6 +70,16 @@ public class WaveManager : MonoBehaviour {
         }
     }
 
+    public bool GetCanGenerateArcs()
+    {
+        return canGenerateArcs;
+    }
+
+    public void SetCanGenerate(bool value)
+    {
+        canGenerateArcs = value;
+    }
+
     private void OnDisable()
     {
         if (generatedArcs == null)
@@ -78,4 +90,5 @@ public class WaveManager : MonoBehaviour {
             arc.SetActive(false);
         }
     }
+
 }

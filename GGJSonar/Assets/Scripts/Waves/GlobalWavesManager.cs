@@ -35,10 +35,36 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
 
     public void SpawnWave(Touch newTouch) {
 		if (newTouch.phase == TouchPhase.Began) {
+            DisablePreviousWaveGeneration();
+
 			Vector3 touchPosition = Camera.main.ScreenToWorldPoint (newTouch.position);
 			SpawnWaveAtPosition(new Vector3(touchPosition.x,touchPosition.y,0));
-		}
+		} else if ( newTouch.phase == TouchPhase.Ended )
+        {
+            DisableCurrentWaveGeneration();
+        }
 	}
+
+    private void DisableCurrentWaveGeneration()
+    {
+        if (wavesInPlay.Count == 0)
+            return;
+
+        wavesInPlay.First.Value.GetComponent<WaveManager>().SetCanGenerate(false);
+    }
+
+    private void DisablePreviousWaveGeneration()
+    {
+        // first wave ever!
+        if (wavesInPlay.Count == 0)
+            return;
+
+        LinkedListNode<GameObject> current = wavesInPlay.First;
+        while (current.Next != null && current.Next.Value.GetComponent<WaveManager>().GetCanGenerateArcs() == true)
+            continue;
+
+        current.Value.GetComponent<WaveManager>().SetCanGenerate(false);
+    }
 
     private void SpawnWaveAtPosition(Vector3 touchPosition)
     {
