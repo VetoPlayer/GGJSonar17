@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 084a38cc8087358448641e09069d88a5
+timeCreated: 1485089164
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Chintzy CPU Shadow BRK
+  fontNames:
+  - Chintzy CPU Shadow BRK
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace POLIMIGameCollective {
 	
 	public class MusicManager : Singleton<MusicManager> {
 
@@ -73,4 +72,3 @@ namespace POLIMIGameCollective {
 		}
 			
 	}
-}
