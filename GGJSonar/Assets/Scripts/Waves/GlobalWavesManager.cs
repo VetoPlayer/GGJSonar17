@@ -39,7 +39,7 @@ public class GlobalWavesManager : Singleton<GlobalWavesManager> {
     }
 
     public void SpawnWave(Touch newTouch) {
-		SfxManager.Instance.Play ("sfx_wave_gen");
+		//SfxManager.Instance.Play ("sfx_wave_gen");
 		if (newTouch.phase == TouchPhase.Began) {
             DisablePreviousWaveGeneration();
 

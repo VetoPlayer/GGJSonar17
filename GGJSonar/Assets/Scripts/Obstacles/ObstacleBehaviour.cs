@@ -15,8 +15,8 @@ public class ObstacleBehaviour : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Player") {
-			SfxManager.Instance.Play ("sfx_game_over");
-			MusicManager.Instance.StopAll ();
+			//SfxManager.Instance.Play ("sfx_game_over");
+			//MusicManager.Instance.StopAll ();
 			GameplayManager.Instance.GameOver ();
 		}
 	}

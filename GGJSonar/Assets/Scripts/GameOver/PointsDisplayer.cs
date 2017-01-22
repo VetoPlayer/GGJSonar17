@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PointsDisplayer : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		int points =GameplayManager.Instance.getPoints ();
+	void OnGUI () {
+		int points = GameplayManager.Instance.getPoints ();
 		GetComponent<Text>().text = "" + points + "";
 	}
 

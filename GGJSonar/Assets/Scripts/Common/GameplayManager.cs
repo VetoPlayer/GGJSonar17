@@ -11,18 +11,20 @@ public class GameplayManager : Singleton<GameplayManager> {
 
 	private int player_points=0;
 
+    public int pointsSpeed = 100;
+
 	private GameState currentState = GameState.START;
 
 	void Start(){
 		StartCoroutine(TutoredGameplayTimer(tutoredGameplayTime));
-		StartCoroutine(TrackPoints());
+        player_points = 0;
 	}
 
 
-	IEnumerator TrackPoints(){
-		yield return new WaitForSeconds(5f);
-		player_points = player_points + 200;
-	}
+	void Update()
+    {
+        player_points += (int)(pointsSpeed * Time.deltaTime);
+    }
 
 
 	IEnumerator TutoredGameplayTimer(float time){
@@ -45,6 +47,7 @@ public class GameplayManager : Singleton<GameplayManager> {
 	}
 
 	public void GameOver(){
+        MusicManagerXXX.Instance.PlayGameOver();
         SceneManager.LoadScene ("GameOver");
 	}
 
