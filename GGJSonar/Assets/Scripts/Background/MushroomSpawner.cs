@@ -20,7 +20,7 @@ public class MushroomSpawner : Singleton<MushroomSpawner> {
 
 	public GameObject currentMushroom;
 
-
+	public float yPosition;
 	// Use this for initialization
 	void Awake () {
 	}
@@ -30,9 +30,10 @@ public class MushroomSpawner : Singleton<MushroomSpawner> {
 		Vector3 normalizedCoords = Camera.main.WorldToViewportPoint (currentMushroom.transform.position);
 		if(normalizedCoords.x < 0) {
 			Destroy(currentMushroom);
-			Vector3 pos = new Vector3 (distanceBetweenMushrooms + Random.Range(minNoise,maxNoise), 0f,0f);
+			Vector3 pos = new Vector3 (distanceBetweenMushrooms + Random.Range(minNoise,maxNoise), yPosition,0f);
 			currentMushroom = Instantiate(mushroomPrefab,pos,Quaternion.identity,this.transform);
 			currentMushroom.GetComponent<Mover> ().enabled = true;
+			currentMushroom.GetComponent<SpriteRenderer>().sprite = mushroomSprites [Random.Range (0, mushroomSprites.Length)];
 		}
 				
 	}
