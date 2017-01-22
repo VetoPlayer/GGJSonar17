@@ -24,7 +24,7 @@ public class SplashScreenManager : MonoBehaviour {
 			screens [i].SetActive(false);
 			yield return null;
 		}
-		MenuManager.Instance.SwitchToMainMenu ();
+		//MenuManager.Instance.SwitchToMainMenu ();
 	}
 
 	void OnDisable() {
