@@ -7,10 +7,40 @@ public class GameplayManager : Singleton<GameplayManager> {
 
 	protected GameplayManager(){}
 
-	public void GameOver(){
-        Debug.Log("die!");
-		//SceneManager.LoadScene ("GameOver");
+	public float tutoredGameplayTime= 15f;
+
+	private GameState currentState = GameState.START;
+
+	void Start(){
+		StartCoroutine(TutoredGameplayTimer(tutoredGameplayTime));
 	}
+
+	IEnumerator TutoredGameplayTimer(float time){
+		yield return new WaitForSeconds (time);
+		NextState (GameState.RANDOM);
+		Debug.Log ("PassedToTheNextState");
+
+
+	}
+
+
+
+	public void NextState(GameState state){
+		currentState = state;
+	
+	}
+
+
+	public GameState getGameState(){
+		return currentState;
+	}
+
+	public void GameOver(){
+        SceneManager.LoadScene ("GameOver");
+	}
+
+
+
 	
 
 }

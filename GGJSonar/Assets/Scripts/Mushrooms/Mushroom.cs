@@ -20,6 +20,8 @@ public class Mushroom : MonoBehaviour {
 
 	void OnBecameInvisible()
     {
+		if(GameplayManager.Instance.getGameState() == GameState.RANDOM){
         mushroomManager.GetComponents<MushroomSpawner>()[(int)type].SpawnNewMushroom();
+		}
     }
 }
