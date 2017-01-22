@@ -15,6 +15,8 @@ public class GameplayManager : Singleton<GameplayManager> {
 
 	private GameState currentState = GameState.START;
 
+    public bool canUpdateScore = true;
+
 	void Start(){
 		StartCoroutine(TutoredGameplayTimer(tutoredGameplayTime));
         player_points = 0;
@@ -23,7 +25,8 @@ public class GameplayManager : Singleton<GameplayManager> {
 
 	void Update()
     {
-        player_points += (int)(pointsSpeed * Time.deltaTime);
+        if(canUpdateScore)
+            player_points += (int)(pointsSpeed * Time.deltaTime);
     }
 
 
@@ -47,6 +50,7 @@ public class GameplayManager : Singleton<GameplayManager> {
 	}
 
 	public void GameOver(){
+
         MusicManagerXXX.Instance.PlayGameOver();
         SceneManager.LoadScene ("GameOver");
 	}
