@@ -2,27 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : Singleton<MenuManager> {
+
+    public GameObject playBtn;
+    public GameObject creditsBtn;
 
     protected MenuManager() { }
 
     void Update()
     {
-        if( Input.touchCount == 1 )
+        if (Input.GetMouseButtonDown(0))
         {
-            var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position), Vector2.zero);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            if( hit.collider.CompareTag("PlayBtn") )
+            if (Physics.Raycast(ray, out hit))
             {
-                SceneManager.LoadScene("Main");
-            } else if( hit.collider.CompareTag("OptionsBtn") )
-            {
-                Debug.Log("Options");
-            } else
-            {
-                return;
+                if (hit.transform == playBtn.transform)
+                    Debug.Log("OK");
             }
         }
+
     }
+    /*if (Input.touchCount > 0)
+    {
+        if (Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            // Create a particle if hit
+            RaycastHit2D hit = Physics2D.Raycast(Input.GetTouch(0).position, Vector2.zero);
+
+            Debug.Log(hit.collider);
+        }
+    }*/
 }
