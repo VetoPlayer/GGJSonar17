@@ -17,23 +17,13 @@ public class ObstacleManager : MonoBehaviour {
     public float xMin, xMax;
     public float yMin, yMax;
 
-	// Update is called once per frame
-	void Update ()
+    public void SpawnNewEnemy()
     {
-        CheckIfOutside();
-    }
-
-    private void CheckIfOutside()
-    {
-        Vector3 normalizedCoords = Camera.main.WorldToViewportPoint(currentEnemy.transform.position);
-        if (normalizedCoords.x < 0)
-        {
-            Destroy(currentEnemy);
-            Vector3 pos = GetEnemyPosition();
-            currentEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity, this.transform);
-            currentEnemy.GetComponent<Mover>().enabled = true;
-            currentEnemy.GetComponent<SpriteRenderer>().sprite = enemySprites[Random.Range(0, enemySprites.Length)];
-        }
+        Destroy(currentEnemy);
+        Vector3 pos = GetEnemyPosition();
+        currentEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity, this.transform);
+        currentEnemy.GetComponent<Mover>().enabled = true;
+        currentEnemy.GetComponent<SpriteRenderer>().sprite = enemySprites[Random.Range(0, enemySprites.Length)];
     }
 
     private Vector3 GetEnemyPosition()

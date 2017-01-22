@@ -6,7 +6,6 @@ public class InputManager : Singleton<InputManager> {
 
 	protected InputManager(){}
 
-
 	private static int MAX_NUM_TOUCHES=1;
 
 	// Update is called once per frame

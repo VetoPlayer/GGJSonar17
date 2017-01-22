@@ -8,7 +8,8 @@ public class GameplayManager : Singleton<GameplayManager> {
 	protected GameplayManager(){}
 
 	public void GameOver(){
-		SceneManager.LoadScene ("GameOver");
+        Debug.Log("die!");
+		//SceneManager.LoadScene ("GameOver");
 	}
 	
 
