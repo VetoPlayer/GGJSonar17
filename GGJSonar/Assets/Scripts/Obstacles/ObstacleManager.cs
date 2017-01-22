@@ -5,7 +5,9 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-public class ObstacleManager : MonoBehaviour {
+public class ObstacleManager : Singleton<ObstacleManager> {
+
+	protected ObstacleManager(){}
 
     public GameObject currentEnemy;
     public GameObject enemyPrefab;
@@ -19,7 +21,9 @@ public class ObstacleManager : MonoBehaviour {
 
     public void SpawnNewEnemy()
     {
-        Destroy(currentEnemy);
+		if (currentEnemy != null) {
+			Destroy (currentEnemy);
+		}
         Vector3 pos = GetEnemyPosition();
         currentEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity, this.transform);
         currentEnemy.GetComponent<Mover>().enabled = true;

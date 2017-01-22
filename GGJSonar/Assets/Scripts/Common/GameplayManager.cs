@@ -18,9 +18,8 @@ public class GameplayManager : Singleton<GameplayManager> {
 	IEnumerator TutoredGameplayTimer(float time){
 		yield return new WaitForSeconds (time);
 		NextState (GameState.RANDOM);
+		ObstacleManager.Instance.SpawnNewEnemy ();
 		Debug.Log ("PassedToTheNextState");
-
-
 	}
 
 
