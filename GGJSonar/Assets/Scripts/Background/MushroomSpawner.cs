@@ -24,7 +24,8 @@ public class MushroomSpawner : Singleton<MushroomSpawner> {
 	// Use this for initialization
 	void Awake () {
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		Vector3 normalizedCoords = Camera.main.WorldToViewportPoint (currentMushroom.transform.position);
